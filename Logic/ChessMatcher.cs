@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjetoFinalTecnicas
+﻿namespace ProjetoFinalTecnicas.Logic
 {
     public class ChessMatcher
     {
@@ -64,7 +58,7 @@ namespace ProjetoFinalTecnicas
             {
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: {player1.username} está com as peças brancas");
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: {player2.username} está com as peças pretas");
-            } 
+            }
             else
             {
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: {player2.username} está com as peças brancas");
@@ -77,8 +71,8 @@ namespace ProjetoFinalTecnicas
             Console.WriteLine();
             Console.WriteLine($"  {Thread.CurrentThread.Name}: Começou!");
             Thread.Sleep(800);
-           
-            if (rnd1.Next(100) > rnd2.Next(100)) 
+
+            if (rnd1.Next(100) > rnd2.Next(100))
             {
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player1.username} venceu!");
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player2.username} perdeu");
