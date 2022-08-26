@@ -8,17 +8,13 @@ namespace ProjetoFinalTecnicas
     {
         static async Task Main(string[] args)
         {
-            HttpClient httpClient = new HttpClient();
-
-            var response = await httpClient.GetAsync($"https://localhost:7112/player");
-            var code = response.StatusCode;
-            var message = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<List<ChessPlayer>>(message);
-            //List<ChessPlayer>? result = await _httpClientStarter.StartHttpClient
-            
-            IGameStarter _gamestarter = new GameStarter();
+            IHttpClientStarter _httpClient = new HttpClientStarter();
+            IStandardMessages _standardMessage = new StandardMessages();
+            IChessMatchStarter _chessMatchStarter = new ChessMatchStarter(_standardMessage);
+            IGameStarter _gamestarter = new GameStarter(_chessMatchStarter);
             IMainMenu _mainmenu = new MainMenu(_gamestarter);
 
+            var result = await _httpClient.StartHttpClient();
             _mainmenu.Menu(result);
         }
     }

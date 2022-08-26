@@ -1,14 +1,18 @@
-﻿namespace ProjetoFinalTecnicas.Logic
-{
-    public class ChessMatcher
-    {
-        private ChessPlayer FirstPlayer;
-        private ChessPlayer SecondPlayer;
+﻿using ProjetoFinalTecnicas.Interfaces;
 
-        public ChessMatcher(ChessPlayer firstPlayer, ChessPlayer secondPlayer)
+namespace ProjetoFinalTecnicas.Logic
+{
+    public class ChessMatcher : IChessMatcher
+    {
+        private readonly ChessPlayer FirstPlayer;
+        private readonly ChessPlayer SecondPlayer;
+        private readonly IChessMatchStarter _chessMatchStarter;
+
+        public ChessMatcher(ChessPlayer firstPlayer, ChessPlayer secondPlayer, IChessMatchStarter chessMatchStarter)
         {
             FirstPlayer = firstPlayer;
             SecondPlayer = secondPlayer;
+            _chessMatchStarter = chessMatchStarter;
         }
         public void ChessMatch()
         {
@@ -37,54 +41,8 @@
                     Console.WriteLine($"  {Thread.CurrentThread.Name}: conexão estabelecida");
                     Console.WriteLine();
 
-                    MatchStarted((ChessPlayer)_lock1, (ChessPlayer)_lock2);
+                    _chessMatchStarter.MatchStarted((ChessPlayer)_lock1, (ChessPlayer)_lock2);
                 }
-            }
-        }
-        public static void PrintEllipsis()
-        {
-            var ellipsis = "...";
-            for (int i = 0; i < ellipsis.Length; i++)
-            {
-                Console.Write(ellipsis[i]);
-                Thread.Sleep(500);
-            }
-        }
-        public void MatchStarted(ChessPlayer player1, ChessPlayer player2)
-        {
-            var rnd1 = new Random();
-            var rnd2 = new Random();
-            if (rnd1.Next(100) > rnd2.Next(100))
-            {
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player1.username} está com as peças brancas");
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player2.username} está com as peças pretas");
-            }
-            else
-            {
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player2.username} está com as peças brancas");
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player1.username} está com as peças pretas");
-            }
-
-            Console.Write($"  {Thread.CurrentThread.Name}: Começando a partida");
-            PrintEllipsis();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine($"  {Thread.CurrentThread.Name}: Começou!");
-            Thread.Sleep(800);
-
-            if (rnd1.Next(100) > rnd2.Next(100))
-            {
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player1.username} venceu!");
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player2.username} perdeu");
-                player1.wins++;
-                player2.loses++;
-            }
-            else
-            {
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player2.username} venceu!");
-                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player1.username} perdeu");
-                player2.wins++;
-                player1.loses++;
             }
         }
     }

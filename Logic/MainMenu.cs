@@ -26,6 +26,7 @@ namespace ProjetoFinalTecnicas.Logic
                     break;
             }
         }
+
         public void GamesPage(Stack<int> pageStack, List<ChessPlayer> chessPlayer)
         {
             var playerQueue = new Queue<ChessPlayer>();
@@ -84,3 +85,4 @@ namespace ProjetoFinalTecnicas.Logic
 
         }
     }
+}
