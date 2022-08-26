@@ -31,22 +31,18 @@ namespace ProjetoFinalTecnicas
                 _lock2 = FirstPlayer;
             }
 
-            Console.WriteLine($"{Thread.CurrentThread.Name}: trying to connect Player {((ChessPlayer)_lock1).username}");
+            Console.WriteLine($"  {Thread.CurrentThread.Name}: verificando a conexão do jogador {((ChessPlayer)_lock1).username}");
 
             lock (_lock1)
             {
-                Console.WriteLine($"{Thread.CurrentThread.Name}: Player {((ChessPlayer)_lock1).username} acquired connection");
-                Console.Write($"{Thread.CurrentThread.Name}: looking for an opponent");
-                PrintEllipsis();
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: conexão estabelecida");
                 Console.WriteLine();
-                Console.WriteLine($"{Thread.CurrentThread.Name}: trying to connect with Player {((ChessPlayer)_lock2).username}");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: verificando a conexão do jogador {((ChessPlayer)_lock2).username}");
                 lock (_lock2)
                 {
-                    Console.WriteLine($"{Thread.CurrentThread.Name}: acquired connection with Player {((ChessPlayer)_lock2).username}");
-                    Console.Write("Starting the match");
-                    PrintEllipsis();
+                    Console.WriteLine($"  {Thread.CurrentThread.Name}: conexão estabelecida");
                     Console.WriteLine();
-                    Console.WriteLine("Match started!");
+
                     MatchStarted((ChessPlayer)_lock1, (ChessPlayer)_lock2);
                 }
             }
@@ -62,19 +58,37 @@ namespace ProjetoFinalTecnicas
         }
         public void MatchStarted(ChessPlayer player1, ChessPlayer player2)
         {
-            var rnd1 = new Random().Next(100);
-            var rnd2 = new Random().Next(100);
-            if (rnd1 > rnd2) 
+            var rnd1 = new Random();
+            var rnd2 = new Random();
+            if (rnd1.Next(100) > rnd2.Next(100))
             {
-                Console.WriteLine($"{Thread.CurrentThread.Name}: Player {player1.username} wins!");
-                Console.WriteLine($"{Thread.CurrentThread.Name}: Player {player2.username} loses");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player1.username} está com as peças brancas");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player2.username} está com as peças pretas");
+            } 
+            else
+            {
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player2.username} está com as peças brancas");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: {player1.username} está com as peças pretas");
+            }
+
+            Console.Write($"  {Thread.CurrentThread.Name}: Começando a partida");
+            PrintEllipsis();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"  {Thread.CurrentThread.Name}: Começou!");
+            Thread.Sleep(800);
+           
+            if (rnd1.Next(100) > rnd2.Next(100)) 
+            {
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player1.username} venceu!");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player2.username} perdeu");
                 player1.wins++;
                 player2.loses++;
             }
             else
             {
-                Console.WriteLine($"{Thread.CurrentThread.Name}: Player {player2.username} wins!");
-                Console.WriteLine($"{Thread.CurrentThread.Name}: Player {player1.username} loses");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player2.username} venceu!");
+                Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player1.username} perdeu");
                 player2.wins++;
                 player1.loses++;
             }
