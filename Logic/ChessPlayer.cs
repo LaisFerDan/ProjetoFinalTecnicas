@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using ProjetoFinalTecnicas.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace ProjetoFinalTecnicas.Logic
 {
-    public class ChessPlayer
+    public class ChessPlayer : IChessPlayer
     {
         [JsonPropertyName("id")]
         public int id { get; set; }
@@ -32,6 +33,10 @@ namespace ProjetoFinalTecnicas.Logic
         public ChessPlayer(string username)
         {
             this.username = username;
+        }
+
+        public ChessPlayer()
+        {
         }
     }
 

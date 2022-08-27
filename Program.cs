@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 using ProjetoFinalTecnicas.Interfaces;
 using ProjetoFinalTecnicas.Logic;
 
@@ -8,11 +9,8 @@ namespace ProjetoFinalTecnicas
     {
         static async Task Main(string[] args)
         {
-            IHttpClientStarter _httpClient = new HttpClientStarter();
-            IStandardMessages _standardMessage = new StandardMessages();
-            IChessMatchStarter _chessMatchStarter = new ChessMatchStarter(_standardMessage);
-            IGameStarter _gamestarter = new GameStarter(_chessMatchStarter);
-            IMainMenu _mainmenu = new MainMenu(_gamestarter);
+            IHttpClientStarter _httpClient = Factory.CreateHttpClientStarter();
+            IMainMenu _mainmenu = Factory.CreateMainMenu();
 
             var result = await _httpClient.StartHttpClient();
             _mainmenu.Menu(result);

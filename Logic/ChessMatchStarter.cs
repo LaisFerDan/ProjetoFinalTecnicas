@@ -15,7 +15,7 @@ namespace ProjetoFinalTecnicas.Logic
             _standardMessage = standardMessage;
         }
 
-        public void MatchStarted(ChessPlayer player1, ChessPlayer player2)
+        public void MatchStarted(IChessPlayer player1, IChessPlayer player2)
         {
             var rnd1 = new Random();
             var rnd2 = new Random();

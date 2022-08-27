@@ -45,10 +45,10 @@ namespace ProjetoFinalTecnicas.Logic
                             Console.ReadKey();
                         }
                         else
-                            _gameStarter.GameStart(chessPlayer[0], chessPlayer[1]);
+                            _gameStarter.GameStart(playerQueue.Dequeue(), playerQueue.Dequeue());
                         break;
                     case "Entrar na fila para jogar":
-                        if (playerQueue.Count > 0)
+                        if (playerQueue.Contains(chessPlayer[0]))
                         {
                             Console.WriteLine("Você já está na fila para jogar, convide seus amigos!");
                             Console.ReadKey();
