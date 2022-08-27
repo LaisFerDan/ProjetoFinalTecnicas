@@ -14,12 +14,16 @@ namespace ProjetoFinalTecnicas.Logic
         {
             Console.Clear();
             var pageStack = new Stack<int>();
-            var choice = Prompt.Select("Let's Chess!", new[] { "Nova partida", "Sair" });
+            var choice = Prompt.Select("Let's Chess!", new[] { "Nova partida", "Visualizar meu perfil", "Sair" });
             switch (choice)
             {
                 case "Nova partida":
                     pageStack.Push(1);
                     GamesPage(pageStack, chessPlayer);
+                    break;
+                case "Visualizar meu perfil":
+                    pageStack.Push(2);
+                    ProfilePage(pageStack, chessPlayer);
                     break;
                 case "Sair":
                     Environment.Exit(0);
@@ -87,7 +91,27 @@ namespace ProjetoFinalTecnicas.Logic
                         break;
                 }
             } while (choice != "Voltar");
+        }
+        public void ProfilePage(Stack<int> pageStack, List<ChessPlayer> chessPlayer)
+        {
+            var answer = true;
+            string username = chessPlayer[0].username;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine($" {chessPlayer[0].url}");
+                Console.WriteLine($"  {char.ToUpper(username[0]) + username.Substring(1)} {chessPlayer[0].country}");
+                Console.WriteLine($"  {chessPlayer[0].name}");
+                Console.WriteLine($"  Last online: {chessPlayer[0].last_online.ToString("dd-MM-yyyy")} | Joined: {chessPlayer[0].joined.ToString("dd-MM-yyyy")} | Followers: {chessPlayer[0].followers}");
+                Console.WriteLine($"  Best rating: {chessPlayer[0].best_rating}");
+                Console.WriteLine($"  Games: {chessPlayer[0].number_of_games}");
+                Console.WriteLine($"  W {chessPlayer[0].wins} | L {chessPlayer[0].loses}");
 
+                Console.WriteLine();
+                answer = Prompt.Confirm("Deseja voltar?");
+            } while (answer == false);
+            pageStack.Pop();
+            Menu(chessPlayer);
         }
     }
 }

@@ -43,6 +43,8 @@ namespace ProjetoFinalTecnicas.Logic
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player2.username} perdeu");
                 player1.wins++;
                 player2.loses++;
+                player1.number_of_games++;
+                player2.number_of_games++;
             }
             else
             {
@@ -50,6 +52,8 @@ namespace ProjetoFinalTecnicas.Logic
                 Console.WriteLine($"  {Thread.CurrentThread.Name}: Jogador {player1.username} perdeu");
                 player2.wins++;
                 player1.loses++;
+                player1.number_of_games++;
+                player2.number_of_games++;
             }
         }
 
