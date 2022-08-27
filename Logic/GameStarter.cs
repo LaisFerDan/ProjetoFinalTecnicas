@@ -10,15 +10,14 @@ namespace ProjetoFinalTecnicas.Logic
         {
             _chessMatchStarter = chessMatchStarter;
         }
-        public async void GameStart(ChessPlayer chessPlayer1, ChessPlayer chessPlayer2)
+        public async void GameStart(IChessPlayer chessPlayer1, IChessPlayer chessPlayer2)
         {
-            
             var answer = false;
             do
             {
                 Console.Clear();
                 Console.WriteLine("  Let's Chess!");
-                ChessMatcher chessMatcher = new ChessMatcher(chessPlayer1, chessPlayer2, _chessMatchStarter);
+                IChessMatcher chessMatcher = new ChessMatcher(chessPlayer1, chessPlayer2, _chessMatchStarter);
 
                 Thread thread1 = new Thread(chessMatcher.ChessMatch)
                 {

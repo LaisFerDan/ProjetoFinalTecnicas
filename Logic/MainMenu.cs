@@ -41,12 +41,13 @@ namespace ProjetoFinalTecnicas.Logic
                     case "Começar partida":
                         if (playerQueue.Count < 2)
                         {
-                            Console.WriteLine("Número insuficiente de jogadores, convide seus amigos para jogar");
+                            Console.WriteLine("Número insuficiente de jogadores");
                             Console.ReadKey();
                         }
                         else
                             _gameStarter.GameStart(playerQueue.Dequeue(), playerQueue.Dequeue());
                         break;
+
                     case "Entrar na fila para jogar":
                         if (playerQueue.Contains(chessPlayer[0]))
                         {
@@ -56,14 +57,17 @@ namespace ProjetoFinalTecnicas.Logic
                         else
                             playerQueue.Enqueue(chessPlayer[0]);
                         break;
+
                     case "Convidar amigo para jogar":
-                        if (index >= chessPlayer.Count)
+                        if (chessPlayer.Count == playerQueue.Count && playerQueue.Contains(chessPlayer[0]))
                         {
                             Console.WriteLine("Todos os seus amigos já foram convidados");
                             Console.ReadKey();
                         }
-                        else if (playerQueue.Count >= 1)
+                        else if (playerQueue.Contains(chessPlayer[0]))
                         {
+                            if (index > playerQueue.Count)
+                                index = 1;
                             playerQueue.Enqueue(chessPlayer[index]);
                             Console.WriteLine($"Amigo {chessPlayer[index].username} convidado!");
                             index++;
@@ -74,8 +78,9 @@ namespace ProjetoFinalTecnicas.Logic
                             Console.WriteLine("Primeiro entre na fila para jogar");
                             Console.ReadKey();
                         }
-
+                        
                         break;
+
                     case "Voltar":
                         pageStack.Pop();
                         Menu(chessPlayer);

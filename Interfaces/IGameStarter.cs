@@ -4,6 +4,6 @@ namespace ProjetoFinalTecnicas.Interfaces
 {
     public interface IGameStarter
     {
-        void GameStart(ChessPlayer chessPlayer1, ChessPlayer chessPlayer2);
+        void GameStart(IChessPlayer chessPlayer1, IChessPlayer chessPlayer2);
     }
 }
