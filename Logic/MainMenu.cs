@@ -14,20 +14,29 @@ namespace ProjetoFinalTecnicas.Logic
         {
             Console.Clear();
             var pageStack = new Stack<int>();
-            var choice = Prompt.Select("Let's Chess!", new[] { "Nova partida", "Visualizar meu perfil", "Sair" });
-            switch (choice)
+            if (chessPlayer.Count > 0)
             {
-                case "Nova partida":
-                    pageStack.Push(1);
-                    GamesPage(pageStack, chessPlayer);
-                    break;
-                case "Visualizar meu perfil":
-                    pageStack.Push(2);
-                    ProfilePage(pageStack, chessPlayer);
-                    break;
-                case "Sair":
-                    Environment.Exit(0);
-                    break;
+                var choice = Prompt.Select("Let's Chess!", new[] { "Nova partida", "Visualizar meu perfil", "Sair" });
+                switch (choice)
+                {
+                    case "Nova partida":
+                        pageStack.Push(1);
+                        GamesPage(pageStack, chessPlayer);
+                        break;
+                    case "Visualizar meu perfil":
+                        pageStack.Push(2);
+                        ProfilePage(pageStack, chessPlayer);
+                        break;
+                    case "Sair":
+                        Environment.Exit(0);
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Parece que sua lista de jogadores está vazia. \nUse o Web API para adicionar jogadores e volte para jogar.");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
         }
 
